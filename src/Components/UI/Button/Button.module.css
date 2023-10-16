@@ -1,0 +1,10 @@
+.root {
+  background-color: #ceddd6;
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 2px 10px 2px;
+}
+
+.root:hover {
+  background-color: #adcabd;
+}

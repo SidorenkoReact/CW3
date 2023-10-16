@@ -1,0 +1,17 @@
+.root {
+    display: flex;
+    width: 100vw;
+    height: 50px;
+    background-color: #779888;
+    align-items: center;
+}
+
+.links {
+    display: flex;
+    justify-content: right;
+    width: 100%;
+}
+
+.links a {
+    margin-right: 5px;
+}

@@ -1,0 +1,38 @@
+.root {
+    border: 1px solid #769787;
+    border-radius: 2px;
+    padding-left: 3px;
+}
+
+.root::placeholder {
+    color: #769787;
+}
+
+.root:hover {
+    background-color: #e8edea;
+    outline: 1px solid black;
+}
+
+.root:hover::placeholder {
+    color: black;
+}
+
+.root:focus {
+    outline: 1px solid #769787 ;
+}
+
+.root::-webkit-search-cancel-button, .root::-webkit-clear-button {
+    appearance: none;
+    background-image: url("/src/assets/symbolcross.svg");
+    background-size: cover;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+}
+
+.root::-webkit-search-cancel-button:hover, .root::-webkit-clear-button:hover {
+    width: 12px;
+    height: 12px;
+}
+
+

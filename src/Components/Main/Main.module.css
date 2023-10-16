@@ -1,0 +1,13 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 600px;
+}
+
+.root hr {
+    width: 100%;
+    height: 1px;
+    background: rgba(93,103,98,0.48);
+    border: none;
+}
