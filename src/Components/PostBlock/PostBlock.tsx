@@ -1,14 +1,19 @@
 import {Button} from "../UI/Button/Button";
 import React from "react";
 import styles from "./PostsBlock.module.css"
+import {IPost} from "../../types/types";
 
-const PostBlock = () => {
+interface Props {
+    post: IPost
+}
+
+const PostBlock: React.FC<Props> = ({post}) => {
     return (
         <article className={styles.root}>
             <div>
-                <h6>Заголовок</h6>
+                <h6>{post.title}</h6>
                 <p>
-                    Текст поста
+                    {post.body}
                 </p>
             </div>
 
