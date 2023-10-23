@@ -13,12 +13,8 @@ interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
 
 const Select: React.FC<Props> = ({options, defaultValue, margin, ...rest}) => {
 
-    const onChangeSelectValue = (event: React.SyntheticEvent<HTMLSelectElement>) => {
-        console.log(event.currentTarget.value)
-    }
-
     return (
-        <select {...rest} onChange={onChangeSelectValue} style={{margin}} className={styles.root}>
+        <select {...rest} style={{margin}} className={styles.root}>
             <option hidden>{defaultValue}</option>
 
             {options.map((option, index) =>

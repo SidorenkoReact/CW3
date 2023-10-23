@@ -1,22 +1,23 @@
 import React, {useEffect, useState} from "react";
 import styles from "./Posts.module.css"
 import {PostBlock} from "../PostBlock/PostBlock";
+import {useAppDispatch, useAppSelector} from "../../Hooks/redux";
+import {selectPosts} from "../../Store/Reducers/fetchPostsSlice";
+import {fetchAllPosts} from "../../Store/asyncActions/fetchPosts";
 import {IPost} from "../../types/types";
-import {PostService} from "../../API/PostService";
-import {useFetching} from "../../Hooks/useFetching";
 
 
-const Posts = () => {
-    const  [posts, setPosts] = useState<IPost[]>([])
+interface Props {
+    posts: IPost[];
+    isLoadingPosts: boolean;
+    errorPosts: string;
+}
 
-    const [fetchPosts, isLoadingPosts, errorPosts] = useFetching(async () => {
-        const response = await PostService.getAll()
-        setPosts(response.data)
-    })
-
+const Posts: React.FC<Props> = ({posts, isLoadingPosts, errorPosts}) => {
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
-        fetchPosts()
+        dispatch(fetchAllPosts())
     }, [])
 
 
