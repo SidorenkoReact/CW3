@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IPost} from "../../types/types";
 import {RootState} from "../Store";
 import {fetchAllPosts} from "../asyncActions/fetchPosts";
+import React from "react";
 
 
 interface InitialStateTypes {
@@ -20,9 +21,19 @@ const fetchPostsSlice = createSlice({
     name: 'fetchPosts',
     initialState,
     reducers: {
-        // fetchAllPosts(state, action: PayloadAction<IPost[]>) {
-        //     state.posts = action.payload
-        // }
+        addPost(state, action: PayloadAction<IPost>) {
+            state.posts = [...state.posts, action.payload]
+        },
+
+        removePost(state, action: PayloadAction<number>) {
+            state.posts = [...state.posts].filter(post => post.id !== action.payload)
+        },
+
+        updatePost(state, action: PayloadAction<IPost>) {
+            const index = [...state.posts].findIndex(post => post.id === action.payload.id)
+            state.posts[index] = action.payload
+
+        }
     },
     extraReducers: builder =>
         builder
@@ -40,6 +51,6 @@ const fetchPostsSlice = createSlice({
 
 })
 
-// export const {fetchAllPosts} = fetchPostsSlice.actions
+export const {addPost, removePost, updatePost} = fetchPostsSlice.actions
 export const selectPosts  = (state: RootState) => state.fetchPosts
 export default fetchPostsSlice.reducer

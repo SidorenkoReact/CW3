@@ -1,0 +1,29 @@
+.root {
+    display: flex;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.29);
+    justify-content: center;
+    align-items: center;
+}
+
+
+.modalContent {
+    width: 190px;
+    height: 195px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.modalContent::before {
+    position: absolute;
+    padding-left: 2px;
+    padding-right: 2px;
+    top: 30%;
+    content: "Тип модального окна: Portal ";
+    background-color: rgba(255, 0, 0, 0.39);
+}
+

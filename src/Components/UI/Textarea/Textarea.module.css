@@ -1,0 +1,21 @@
+.root {
+    width: 166px;
+    height: 100px;
+    border: 1px solid #769787;
+    border-radius: 2px;
+    padding-left: 3px;
+    resize: none;
+}
+
+.root:hover {
+    outline: 1px solid black;
+}
+
+.root:hover::placeholder {
+    color: black;
+}
+
+.root::placeholder {
+    color: #769787;
+}
+

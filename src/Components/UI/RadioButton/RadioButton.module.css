@@ -1,0 +1,11 @@
+.root {
+    display: flex;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.label {
+    font-size: 0.8em;
+    padding-bottom: 1px;
+    margin-left: 5px;
+}

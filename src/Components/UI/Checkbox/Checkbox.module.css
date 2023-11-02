@@ -1,0 +1,10 @@
+.root {
+    display: flex;
+}
+
+.label {
+    padding-left: 5px;
+    font-size: 0.8em;
+    padding-bottom: 1px;
+}
+

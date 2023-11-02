@@ -1,0 +1,21 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 90%;
+    margin-left: 12px;
+
+}
+
+.root label {
+    margin-right: 15px;
+    align-self: center;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    color: #567062;
+}
+
+.buttons_container {
+    margin-top: 7px;
+    margin-bottom: 5px;
+}
