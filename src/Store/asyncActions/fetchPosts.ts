@@ -1,10 +1,19 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {PostService} from "../../API/PostService";
+import {setTotalCount} from "../Reducers/fetchPostsSlice";
 
 
-export const fetchAllPosts = createAsyncThunk('posts/fetchAll', async (_, thunkAPI) => {
+type ArgsTypes = {
+    pageNumber?: number;
+    limit?: number;
+}
+
+export const fetchAllPosts = createAsyncThunk('posts/fetchAll', async (data: ArgsTypes, thunkAPI) => {
+    const {pageNumber, limit} = data
+
     try {
-        const response = await PostService.getAll()
+        const response = await PostService.getAll(pageNumber, limit)
+        thunkAPI.dispatch(setTotalCount(response.headers['x-total-count']))
         return response.data
     }
     catch (e) {

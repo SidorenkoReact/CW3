@@ -5,15 +5,16 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement>{
     children: React.ReactNode
     margin?: string;
     width?: string;
+    isActive?: boolean;
 
 }
 
-const Button: React.FC<Props> = ({children, margin, width, ...rest}) => {
+const Button: React.FC<Props> = ({children, margin, width, isActive, ...rest}) => {
     return (
         <button
             {...rest}
             style={{margin, width}}
-            className={styles.root}>{children}</button>
+            className={[styles.root, isActive && styles.active].join(' ')}>{children}</button>
     )
 }
 

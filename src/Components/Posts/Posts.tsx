@@ -7,22 +7,29 @@ import {fetchAllPosts} from "../../Store/asyncActions/fetchPosts";
 import {IPost} from "../../types/types";
 import {Modal} from "../Modals/Modal/Modal";
 import {EditPostForm} from "../Forms/EditPostForm/EditPostForm";
+import {Button} from "../UI/Button/Button";
+import {Pagination} from "../UI/Pagination/Pagination";
 
 
 interface Props {
     posts: IPost[];
+    totalCount: number;
     isLoadingPosts: boolean;
     errorPosts: string;
+    pageNumber: number;
+    limit: number;
 }
 
-const Posts: React.FC<Props> = ({posts, isLoadingPosts, errorPosts}) => {
+const Posts: React.FC<Props> = ({posts, isLoadingPosts, errorPosts, totalCount, pageNumber, limit}) => {
+
     const [currentPost, setCurrentPost] = useState<IPost>()
     const [modal, setModal] = useState(false)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchAllPosts())
-    }, [])
+        dispatch(fetchAllPosts({pageNumber, limit}))
+
+    }, [pageNumber, limit])
 
 
     return (
@@ -38,7 +45,6 @@ const Posts: React.FC<Props> = ({posts, isLoadingPosts, errorPosts}) => {
             {isLoadingPosts
                 ? <h4>Загрузка...</h4>
                 : posts.map((post) => <PostBlock post={post} setModal={setModal} setCurrentPost={setCurrentPost} key={post.id}/>)}
-
         </section>
     )
 }

@@ -1,10 +1,19 @@
 .root {
+  display: flex;
   background-color: #ceddd6;
   border: 1px solid black;
   border-radius: 2px;
   padding: 2px 10px 2px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .root:hover {
   background-color: #adcabd;
+}
+
+.active {
+  background-color: #79998b;
+  color: white;
 }

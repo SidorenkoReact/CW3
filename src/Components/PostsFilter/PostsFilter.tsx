@@ -6,10 +6,11 @@ import styles from "./PostsFilter.module.css"
 interface Props {
     searchValue: string;
     setSearchValue: React.Dispatch<React.SetStateAction<string>>;
-    setSortValue: React.Dispatch<React.SetStateAction<string>>
+    setSortValue: React.Dispatch<React.SetStateAction<string>>;
+    setLimitPosts: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const PostsFilter: React.FC<Props> = ({searchValue, setSearchValue, setSortValue}) => {
+const PostsFilter: React.FC<Props> = ({searchValue, setSearchValue, setSortValue, setLimitPosts}) => {
 
 
     return (
@@ -33,7 +34,10 @@ const PostsFilter: React.FC<Props> = ({searchValue, setSearchValue, setSortValue
                 defaultValue="Сортировать"
             />
 
-            <Select margin="2px 0px 0px 0px" options={[
+            <Select
+                onChange={event => setLimitPosts(Number(event.target.value))}
+                margin="2px 0px 0px 0px"
+                options={[
                 {name: "5", value: "5"},
                 {name: "10", value: "10"},
                 {name: "25", value: "25"},
