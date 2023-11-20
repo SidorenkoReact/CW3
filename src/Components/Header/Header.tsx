@@ -1,11 +1,14 @@
 import {Button} from "../UI/Button/Button";
 import React from "react";
 import styles from "./Header.module.css"
+import {Link, useNavigate} from "react-router-dom";
 
 
 const Header = () => {
+    const navigate = useNavigate()
 
     const onClickButton = () => {
+        navigate("login")
         // fetch('http://localhost:3001/users', {
         //     method: 'POST',
         //     headers: {
@@ -44,8 +47,8 @@ const Header = () => {
         <header className={styles.root}>
             <Button onClick={onClickButton} margin={"0px 0px 0px 10px"}>Войти</Button>
             <nav className={styles.links}>
-                <a href="">О сайте</a>
-                <a href="">Посты</a>
+                <Link to="about">О сайте</Link>
+                <Link to="/">Посты</Link>
             </nav>
         </header>
     )

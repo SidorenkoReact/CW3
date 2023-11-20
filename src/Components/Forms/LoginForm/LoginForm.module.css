@@ -1,0 +1,18 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #769787;
+    border-radius: 3px;
+    margin: 100px 0;
+    padding: 8px 10px;
+}
+
+
+.root h4 {
+    align-self: center;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    color: #769787;
+}

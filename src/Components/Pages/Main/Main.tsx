@@ -1,18 +1,18 @@
-import {Button} from "../UI/Button/Button";
+import {Button} from "../../UI/Button/Button";
 import React, {useState} from "react";
 import styles from "./Main.module.css"
-import {Posts} from "../Posts/Posts";
-import {PostsFilter} from "../PostsFilter/PostsFilter";
-import {useAppSelector} from "../../Hooks/redux";
-import {selectPosts} from "../../Store/Reducers/fetchPostsSlice";
-import {usePosts} from "../../Hooks/usePosts";
-import {PostForm} from "../Forms/PostForm/PostForm";
-import {Checkbox} from "../UI/Checkbox/Checkbox";
-import {ModalTypeRadioButtons} from "../ModalTypeRadioButtons/ModalTypeRadioButtons";
-import {Portal} from "../Modals/Portal/Portal";
-import {ModalSwitch} from "../Modals/ModalSwitch/ModalSwitch";
-import {Pagination} from "../UI/Pagination/Pagination";
-import {getPageArray} from "../../utils/pages";
+import {Posts} from "../../Posts/Posts";
+import {PostsFilter} from "../../PostsFilter/PostsFilter";
+import {useAppSelector} from "../../../Hooks/redux";
+import {selectPosts} from "../../../Store/Reducers/fetchPostsSlice";
+import {usePosts} from "../../../Hooks/usePosts";
+import {PostForm} from "../../Forms/PostForm/PostForm";
+import {Checkbox} from "../../UI/Checkbox/Checkbox";
+import {ModalTypeRadioButtons} from "../../ModalTypeRadioButtons/ModalTypeRadioButtons";
+import {Portal} from "../../Modals/Portal/Portal";
+import {ModalSwitch} from "../../Modals/ModalSwitch/ModalSwitch";
+import {Pagination} from "../../UI/Pagination/Pagination";
+import {getPageArray} from "../../../utils/pages";
 
 
 const Main = () => {
