@@ -1,0 +1,51 @@
+.root {
+    position: relative;
+}
+
+.popupWindow {
+    opacity: 0;
+    transition: all 600ms linear;
+}
+
+
+.triangle {
+    position: absolute;
+    border: 6px solid transparent;
+    border-top: 6px solid rgba(205, 213, 209, 0.88);
+    bottom: 13px;
+}
+
+.window {
+    position: absolute;
+    padding: 2px;
+    min-width: 180px;
+    height: fit-content;
+    background-color: rgb(230, 236, 233);
+    bottom: 22px;
+    border-radius: 4px;
+    left: 10px;
+}
+
+
+
+.content {
+
+}
+
+.content:after {
+    display: block;
+    position: absolute;
+    transform: rotate(-15deg);
+    bottom: 0;
+    left: -1px;
+    width: 10px;
+    height: 10px;
+    content: ' ';
+    z-index: 2;
+}
+
+.canvas {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+}

@@ -7,6 +7,7 @@ import {removePost} from "../../Store/Reducers/fetchPostsSlice";
 import {Modal} from "../Modals/Modal/Modal";
 import {EditPostForm} from "../Forms/EditPostForm/EditPostForm";
 import {Portal} from "../Modals/Portal/Portal";
+import {useNavigate} from "react-router-dom";
 
 interface Props {
     post: IPost
@@ -16,6 +17,11 @@ interface Props {
 
 const PostBlock: React.FC<Props> = ({post, setCurrentPost, setModal}) => {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+
+    const onClickButtonPostOpen = (id: number) => {
+        navigate('/post/' + id)
+    }
 
     const onClickButtonPostRemove = (id: number) => {
         dispatch(removePost(id))
@@ -37,7 +43,7 @@ const PostBlock: React.FC<Props> = ({post, setCurrentPost, setModal}) => {
             </div>
 
             <div className={styles.buttons}>
-                <Button>Открыть</Button>
+                <Button onClick={() => onClickButtonPostOpen(post.id)}>Открыть</Button>
                 <Button
                     onClick={() => onClickButtonPostRemove(post.id)}
                     margin={"5px 0px 0px 0px"}

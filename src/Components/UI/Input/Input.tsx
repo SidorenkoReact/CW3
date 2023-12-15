@@ -1,16 +1,16 @@
-import React, {FunctionComponent} from "react";
+import React, {forwardRef, FunctionComponent, InputHTMLAttributes, RefObject} from "react";
 import styles from "./Input.module.css"
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
     margin?: string;
     width?: string;
 }
 
-const Input: FunctionComponent<Props> = ({margin, width, ...rest}) => {
+const Input = forwardRef<HTMLInputElement, Props>(({margin, width, ...rest}, ref) => {
     return (
-        <input {...rest} className={styles.root} style={{margin, width}}/>
+        <input ref={ref} {...rest} className={styles.root} style={{margin, width}}/>
     )
-}
+})
 
 
 export {Input}

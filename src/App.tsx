@@ -4,15 +4,18 @@ import {Provider} from "react-redux";
 import { store } from './Store/Store';
 import {AppRouter} from "./Components/AppRouter";
 import {BrowserRouter} from "react-router-dom";
+import {AuthProvider} from "./HOC/AuthProvider";
 
 function App() {
   return (
     <div className="App">
-        <Provider store={store}>
-            <BrowserRouter>
-                <AppRouter/>
-            </BrowserRouter>
-        </Provider>
+        <AuthProvider>
+            <Provider store={store}>
+                <BrowserRouter>
+                    <AppRouter/>
+                </BrowserRouter>
+            </Provider>
+        </AuthProvider>
     </div>
   );
 }

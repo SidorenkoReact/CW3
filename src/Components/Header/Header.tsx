@@ -2,13 +2,15 @@ import {Button} from "../UI/Button/Button";
 import React from "react";
 import styles from "./Header.module.css"
 import {Link, useNavigate} from "react-router-dom";
+import {useAuth} from "../../Hooks/useAuth";
 
 
 const Header = () => {
+    const {user, signOut} = useAuth()
     const navigate = useNavigate()
 
     const onClickButton = () => {
-        navigate("login")
+
         // fetch('http://localhost:3001/users', {
         //     method: 'POST',
         //     headers: {
@@ -45,7 +47,15 @@ const Header = () => {
 
     return (
         <header className={styles.root}>
-            <Button onClick={onClickButton} margin={"0px 0px 0px 10px"}>Войти</Button>
+            {!user
+                ? <Button
+                    onClick={() => navigate("login")}
+                    margin={"0px 0px 0px 10px"}>Войти</Button>
+                : <Button
+                    onClick={() => signOut(() => navigate('/', {replace: true}))}
+                    margin={"0px 0px 0px 10px"}>Выйти</Button>
+            }
+
             <nav className={styles.links}>
                 <Link to="about">О сайте</Link>
                 <Link to="/">Посты</Link>

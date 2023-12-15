@@ -1,14 +1,11 @@
 import {useEffect, useState} from "react";
+import {TValidator, TValidators, ValidMessages} from "../types/types";
 
 export enum ValidTypes {
     isEmail = 'isEmail',
     isEmpty = 'isEmpty',
     minLength = 'minLength',
     maxLength = 'maxLength',
-}
-
-type ValidMessages = {
-    [key in ValidTypes]: string;
 }
 
 const getValidatorMessage = (type: ValidTypes, option: number | undefined): string => {
@@ -23,22 +20,12 @@ const getValidatorMessage = (type: ValidTypes, option: number | undefined): stri
     return messages[type]
 }
 
-export type TValidator = {
-    type: ValidTypes;
-    option?: number
-}
-
-export type TValidators = {
-    [key in ValidTypes]: (option?: number) => TValidator
-}
-
 export const validators: TValidators = {
     [ValidTypes.isEmail]: (option?: number) => ({type: ValidTypes.isEmail, option}),
     [ValidTypes.isEmpty]: (option?: number) => ({type: ValidTypes.isEmpty, option}),
     [ValidTypes.minLength]: (option?: number) => ({type: ValidTypes.minLength, option}),
     [ValidTypes.maxLength]: (option?: number) => ({type: ValidTypes.maxLength, option}),
 }
-
 
 export const useValidate = (value: string, validators: TValidator[]) => {
     const [messages, setMessage] = useState<string[]>([])
@@ -100,6 +87,7 @@ export const useValidate = (value: string, validators: TValidator[]) => {
 
 
     return {
-        messages
+        messages,
+        isValid: messages.length !== 0
     }
 }

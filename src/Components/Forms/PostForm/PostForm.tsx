@@ -6,14 +6,17 @@ import styles from "./PostForm.module.css"
 import {useAppDispatch} from "../../../Hooks/redux";
 import {IPost} from "../../../types/types";
 import {addPost} from "../../../Store/Reducers/fetchPostsSlice";
+import {PostService} from "../../../API/PostService";
+import {createPost} from "../../../Store/asyncActions/fetchPosts";
 
 
 interface PropsType {
-    setIsVisibleForm: React.Dispatch<React.SetStateAction<boolean>>
+    setIsVisibleForm: React.Dispatch<React.SetStateAction<boolean>>;
+    isServerMode: boolean;
 }
 
 
-const PostForm: React.FC<PropsType> = ({setIsVisibleForm}) => {
+const PostForm: React.FC<PropsType> = ({setIsVisibleForm, isServerMode}) => {
     const dispatch = useAppDispatch()
 
     const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
@@ -27,7 +30,13 @@ const PostForm: React.FC<PropsType> = ({setIsVisibleForm}) => {
             body:  form.get('message') as string || '',
         }
 
-        dispatch(addPost(newPost))
+        if (isServerMode) {
+            dispatch(createPost(newPost))
+
+        } else {
+            dispatch(addPost(newPost))
+        }
+
         setIsVisibleForm(false)
     }
 

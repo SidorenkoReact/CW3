@@ -28,7 +28,7 @@ const Posts: React.FC<Props> = ({posts, isLoadingPosts, errorPosts, totalCount, 
 
     useEffect(() => {
         dispatch(fetchAllPosts({pageNumber, limit}))
-
+        // throw new Error('dsadasd')
     }, [pageNumber, limit])
 
 

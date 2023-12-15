@@ -11,4 +11,15 @@ export class PostService {
         })
     }
 
+    public static async getById(id?: string) {
+        return await axios.get('http://localhost:3001/posts/' + id)
+    }
+
+    public static async getPostCommentsById(id: string) {
+        return await axios.get(` http://localhost:3001/posts/${id}/comments`)
+    }
+
+    public static async createPost(post: IPost) {
+        return await axios.post('http://localhost:3001/posts/', post)
+    }
 }
