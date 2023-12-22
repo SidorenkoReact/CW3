@@ -9,6 +9,7 @@ import {Modal} from "../Modals/Modal/Modal";
 import {EditPostForm} from "../Forms/EditPostForm/EditPostForm";
 import {Button} from "../UI/Button/Button";
 import {Pagination} from "../UI/Pagination/Pagination";
+import {PostsList} from "../PostsList";
 
 
 interface Props {
@@ -41,10 +42,13 @@ const Posts: React.FC<Props> = ({posts, isLoadingPosts, errorPosts, totalCount, 
                 />
             </Modal>
             <h4>Посты</h4>
-            {errorPosts && errorPosts}
-            {isLoadingPosts
-                ? <h4>Загрузка...</h4>
-                : posts.map((post) => <PostBlock post={post} setModal={setModal} setCurrentPost={setCurrentPost} key={post.id}/>)}
+            <PostsList
+                posts={posts}
+                isLoadingPosts={isLoadingPosts}
+                errorPosts={errorPosts}
+                setCurrentPost={setCurrentPost}
+                setModal={setModal}
+            />
         </section>
     )
 }

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {RadioButton} from "../UI/RadioButton/RadioButton";
+import {RadioButton} from "../../UI/RadioButton/RadioButton";
 import styles from "./ModalTypeRadioButtons.module.css"
 
 interface Props {

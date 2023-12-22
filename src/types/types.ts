@@ -41,6 +41,12 @@ export type ValidMessages = {
     [key in ValidTypes]: string;
 }
 
+export enum PaginationType {
+    PAGE = 'PAGE',
+    INFINITY = 'INFINITY',
+}
+
+
 
 // declare module "react" {
 //     function forwardRef<T, P = {}>(

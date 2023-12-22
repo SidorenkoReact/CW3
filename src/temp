@@ -1,0 +1,48 @@
+
+Да, использование заголовка x-total-count из ответа сервера является распространённым и эффективным способом для
+определения наличия дополнительных данных при реализации бесконечной прокрутки или пагинации. Ваш сервер должен
+включать в ответ этот заголовок, который указывает общее количество доступных элементов (например, постов).
+
+Вот как вы можете использовать x-total-count для определения значения hasMore:
+
+Получение общего количества элементов: Извлеките значение x-total-count из заголовков ответа сервера. Это число
+отражает общее количество доступных постов.
+
+Сравнение с уже загруженными данными: Сравните это число с количеством элементов, которые уже были загружены в
+вашем приложении. Если количество загруженных элементов меньше общего количества, установите hasMore в true, что
+указывает на наличие дополнительных данных для загрузки.
+
+Обновление hasMore при каждом запросе: После каждого запроса на получение новой порции данных обновляйте значение
+hasMore, основываясь на сравнении текущего количества загруженных элементов с общим количеством, указанным в x-total-count.
+
+Вот пример обновления hasMore в контексте Redux Toolkit:
+
+javascript
+Copy code
+const fetchPosts = createAsyncThunk(
+  'posts/fetchPosts',
+  async ({ page, limit }, { getState, rejectWithValue }) => {
+    try {
+      const response = await fetch(`https://example.com/api/posts?page=${page}&limit=${limit}`);
+      if (!response.ok) {
+        throw new Error('Server error!');
+      }
+      const totalCount = parseInt(response.headers.get('x-total-count'), 10);
+      const data = await response.json();
+      const { posts } = getState().posts;
+      return { posts: data, hasMore: posts.length + data.length < totalCount };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+// В extraReducers вашего слайса
+[fetchPosts.fulfilled]: (state, action) => {
+  state.posts.push(...action.payload.posts);
+  state.hasMore = action.payload.hasMore;
+  // Остальные обновления состояния
+},
+В этом примере, при каждом выполнении запроса, hasMore обновляется на основе сравнения общего количества
+постов (из заголовка x-total-count) и количества уже загруженных постов. Это обеспечивает точное управление
+процессом подгрузки данных.

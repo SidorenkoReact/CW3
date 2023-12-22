@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IPost, IPostComments} from "../../types/types";
+import {IPost, IPostComments, PaginationType} from "../../types/types";
 import {RootState} from "../Store";
 import {createPost, fetchAllPosts, fetchPostById, fetchPostCommentsById} from "../asyncActions/fetchPosts";
 
@@ -8,6 +8,7 @@ interface InitialStateTypes {
     currentPost: IPost | null;
     currentPostComments: IPostComments[] | null
     totalCount: number;
+    paginationType: PaginationType;
     isLoading: boolean;
     error: string;
 }
@@ -17,6 +18,7 @@ const initialState: InitialStateTypes = {
     currentPost: null,
     currentPostComments: null,
     totalCount: 0,
+    paginationType: PaginationType.PAGE,
     isLoading: false,
     error: ''
 }
@@ -40,6 +42,10 @@ const fetchPostsSlice = createSlice({
 
         setTotalCount(state, action: PayloadAction<number>) {
             state.totalCount = action.payload
+        },
+
+        setPaginationType(state, action: PayloadAction<PaginationType>) {
+            state.paginationType = action.payload
         }
     },
     extraReducers: builder =>
@@ -48,7 +54,12 @@ const fetchPostsSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(fetchAllPosts.fulfilled.type, (state, action: PayloadAction<IPost[]>) => {
-                state.posts = action.payload
+                if (state.paginationType === PaginationType.PAGE)
+                    state.posts = action.payload
+
+                if (state.paginationType === PaginationType.INFINITY)
+                    state.posts = [...state.posts, ...action.payload]
+
                 state.isLoading = false
             })
             .addCase(fetchAllPosts.rejected.type, (state, action: PayloadAction<string>) => {
@@ -93,7 +104,7 @@ const fetchPostsSlice = createSlice({
             })
 })
 
-export const {addPost, removePost, updatePost, setTotalCount} = fetchPostsSlice.actions
+export const {addPost, removePost, updatePost, setTotalCount, setPaginationType} = fetchPostsSlice.actions
 export const selectPosts  = (state: RootState) => state.fetchPosts
 export const selectPost = (state: RootState) =>  state.fetchPosts.currentPost
 export const selectComments = (state: RootState) => state.fetchPosts.currentPostComments
