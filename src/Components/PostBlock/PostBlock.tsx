@@ -8,6 +8,8 @@ import {Modal} from "../Modals/Modal/Modal";
 import {EditPostForm} from "../Forms/EditPostForm/EditPostForm";
 import {Portal} from "../Modals/Portal/Portal";
 import {useNavigate} from "react-router-dom";
+import {PostService} from "../../API/PostService";
+import {deletePostById} from "../../Store/asyncActions/fetchPosts";
 
 interface Props {
     post: IPost
@@ -24,7 +26,8 @@ const PostBlock: React.FC<Props> = ({post, setCurrentPost, setModal}) => {
     }
 
     const onClickButtonPostRemove = (id: number) => {
-        dispatch(removePost(id))
+        // dispatch(removePost(id))
+        dispatch(deletePostById(id))
     }
 
     const onClickButtonPostEdit = (post: IPost) => {

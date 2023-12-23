@@ -19,9 +19,10 @@ import {PaginationType} from "../../../types/types";
 
 
 const Main = () => {
+    // СДЕЛАТЬ КОНТЕКСТ!!!!!!!!!!!
     const [isServerMode, setIsServerMode] = useState<boolean>(false)
-    const [page, setPage] = useState<number>(1)
-    const [limit, setLimit] = useState<number>(10)
+    const [page, setPage] = useState<number>(21)
+    const [limit, setLimit] = useState<number>(5)
     const [modal, setModal] = useState<boolean>(false)
     const [modalType, setModalType] = useState<string>('Css')
     const [searchValue, setSearchValue] = useState<string>("")
@@ -42,7 +43,7 @@ const Main = () => {
         <main className={styles.root}>
             <Button onClick={() => setModal(true)} margin="5px 0px 5px 0px">Добавить пост</Button>
 
-            <Checkbox onChange={() => setIsServerMode(prev => !prev)} label="Добавить на сервер"/>
+            <Checkbox onChange={() => setIsServerMode(prev => !prev)} label="Rest Api"/>
             <ModalTypeRadioButtons setModalType={setModalType} options={['Portal', 'Css']}/>
 
             <PaginationOrScrollSelector options={[

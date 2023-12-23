@@ -1,7 +1,13 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IPost, IPostComments, PaginationType} from "../../types/types";
 import {RootState} from "../Store";
-import {createPost, fetchAllPosts, fetchPostById, fetchPostCommentsById} from "../asyncActions/fetchPosts";
+import {
+    createPost,
+    deletePostById,
+    fetchAllPosts,
+    fetchPostById,
+    fetchPostCommentsById
+} from "../asyncActions/fetchPosts";
 
 interface InitialStateTypes {
     posts: IPost[];
@@ -99,6 +105,18 @@ const fetchPostsSlice = createSlice({
                 state.isLoading = false
             })
             .addCase(createPost.rejected.type, (state, action: PayloadAction<string>) => {
+                state.error = action.payload
+                state.isLoading = false
+            })
+
+            .addCase(deletePostById.pending.type, (state) => {
+                state.isLoading = true
+            })
+            .addCase(deletePostById.fulfilled.type, (state, action: PayloadAction<number>) => {
+                // removePost(action.payload)
+                state.isLoading = false
+            })
+            .addCase(deletePostById.rejected.type, (state, action: PayloadAction<string>) => {
                 state.error = action.payload
                 state.isLoading = false
             })

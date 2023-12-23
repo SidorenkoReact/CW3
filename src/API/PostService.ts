@@ -22,4 +22,8 @@ export class PostService {
     public static async createPost(post: IPost) {
         return await axios.post('http://localhost:3001/posts/', post)
     }
+
+    public static async deletePostById(id: number) {
+        return await axios.delete('http://localhost:3001/posts/' + id)
+    }
 }
