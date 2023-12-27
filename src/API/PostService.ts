@@ -26,4 +26,9 @@ export class PostService {
     public static async deletePostById(id: number) {
         return await axios.delete('http://localhost:3001/posts/' + id)
     }
+
+    public static async updatePostById(id: number, post: IPost) {
+        return await axios.patch('http://localhost:3001/posts/' + id, post)
+    }
+
 }

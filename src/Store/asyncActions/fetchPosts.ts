@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {PostService} from "../../API/PostService";
-import {removePost, setTotalCount} from "../Reducers/fetchPostsSlice";
+import {removePost, setTotalCount, updatePost} from "../Reducers/fetchPostsSlice";
 import {IPost} from "../../types/types";
 
 
@@ -69,6 +69,21 @@ export const deletePostById = createAsyncThunk('post/deleteById', async (id:numb
         return response.data
 
 
+    }
+    catch (e) {
+        if (e instanceof Error)
+            return thunkAPI.rejectWithValue(e.message)
+    }
+
+})
+
+export const updatePostById = createAsyncThunk('post/updatePost', async (data:{id: number, post: IPost}, thunkAPI) => {
+    const {id, post} = data
+
+    try {
+        const response = await PostService.updatePostById(id, post)
+        thunkAPI.dispatch(updatePost(post))
+        return response.data
     }
     catch (e) {
         if (e instanceof Error)

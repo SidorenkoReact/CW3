@@ -6,13 +6,16 @@ import {useAppDispatch} from "../../../Hooks/redux";
 import {updatePost} from "../../../Store/Reducers/fetchPostsSlice";
 import {IPost} from "../../../types/types";
 import styles from "./EditPostForm.module.css"
+import {PostService} from "../../../API/PostService";
+import {updatePostById} from "../../../Store/asyncActions/fetchPosts";
 
 interface PropsType {
+    isServerMode: boolean;
     post: IPost | undefined;
-    setIsActive: React.Dispatch<React.SetStateAction<boolean>>
+    setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const EditPostForm: React.FC<PropsType> = ({post, setIsActive}) => {
+const EditPostForm: React.FC<PropsType> = ({isServerMode, post, setIsActive}) => {
     const [inputValue, setInputValue] = useState('')
     const [textareaValue, setTextareaValue] = useState('')
     const dispatch = useAppDispatch()
@@ -26,7 +29,12 @@ const EditPostForm: React.FC<PropsType> = ({post, setIsActive}) => {
                 title: inputValue,
                 body: textareaValue,
             }
-            dispatch(updatePost(editedPost))
+
+            if (isServerMode)
+                dispatch(updatePostById({id: post.id, post: editedPost}))
+            else
+                dispatch(updatePost(editedPost))
+
         }
         setIsActive(false)
     }

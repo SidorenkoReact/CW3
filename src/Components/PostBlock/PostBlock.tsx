@@ -12,12 +12,13 @@ import {PostService} from "../../API/PostService";
 import {deletePostById} from "../../Store/asyncActions/fetchPosts";
 
 interface Props {
-    post: IPost
-    setCurrentPost: React.Dispatch<React.SetStateAction<IPost | undefined>>
-    setModal: React.Dispatch<React.SetStateAction<boolean>>
+    isServerMode: boolean;
+    post: IPost;
+    setCurrentPost: React.Dispatch<React.SetStateAction<IPost | undefined>>;
+    setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PostBlock: React.FC<Props> = ({post, setCurrentPost, setModal}) => {
+const PostBlock: React.FC<Props> = ({isServerMode, post, setCurrentPost, setModal}) => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
@@ -26,8 +27,10 @@ const PostBlock: React.FC<Props> = ({post, setCurrentPost, setModal}) => {
     }
 
     const onClickButtonPostRemove = (id: number) => {
-        // dispatch(removePost(id))
-        dispatch(deletePostById(id))
+        if (isServerMode)
+            dispatch(deletePostById(id))
+        else
+            dispatch(removePost(id))
     }
 
     const onClickButtonPostEdit = (post: IPost) => {

@@ -6,7 +6,7 @@ import {
     deletePostById,
     fetchAllPosts,
     fetchPostById,
-    fetchPostCommentsById
+    fetchPostCommentsById, updatePostById
 } from "../asyncActions/fetchPosts";
 
 interface InitialStateTypes {
@@ -117,6 +117,17 @@ const fetchPostsSlice = createSlice({
                 state.isLoading = false
             })
             .addCase(deletePostById.rejected.type, (state, action: PayloadAction<string>) => {
+                state.error = action.payload
+                state.isLoading = false
+            })
+
+            .addCase(updatePostById.pending.type, (state) => {
+                state.isLoading = true
+            })
+            .addCase(updatePostById.fulfilled.type, (state) => {
+                state.isLoading = false
+            })
+            .addCase(updatePostById.rejected.type, (state, action: PayloadAction<string>) => {
                 state.error = action.payload
                 state.isLoading = false
             })

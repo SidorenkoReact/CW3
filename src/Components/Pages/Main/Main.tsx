@@ -19,9 +19,8 @@ import {PaginationType} from "../../../types/types";
 
 
 const Main = () => {
-    // СДЕЛАТЬ КОНТЕКСТ!!!!!!!!!!!
     const [isServerMode, setIsServerMode] = useState<boolean>(false)
-    const [page, setPage] = useState<number>(21)
+    const [page, setPage] = useState<number>(1)
     const [limit, setLimit] = useState<number>(5)
     const [modal, setModal] = useState<boolean>(false)
     const [modalType, setModalType] = useState<string>('Css')
@@ -69,10 +68,10 @@ const Main = () => {
             />
 
             <Posts
+                isServerMode={isServerMode}
                 posts={filteredAndSortedPosts}
                 isLoadingPosts={isLoading}
                 errorPosts={error}
-                totalCount={totalCount}
                 pageNumber={page}
                 limit={limit}
             />
